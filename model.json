@@ -8,6 +8,20 @@
   "seed": 42,
   "nodes": [
     {
+      "category": "Quantities",
+      "name": "Electron position X",
+      "type": "quantity",
+      "symbol": "X",
+      "op": "quantity",
+      "id": "position",
+      "x": 0,
+      "y": 10,
+      "params": {},
+      "units": "a₀",
+      "domain": "space3",
+      "source": null
+    },
+    {
       "id": "kinetic",
       "op": "kinetic",
       "name": "Kinetic energy",
@@ -15,7 +29,7 @@
       "category": "Quantum mechanics",
       "type": "quantum",
       "x": 0,
-      "y": 10,
+      "y": 165,
       "params": {
         "mass": 1
       },
@@ -29,7 +43,7 @@
       "category": "Quantum mechanics",
       "type": "quantum",
       "x": 0,
-      "y": 160,
+      "y": 330,
       "params": {
         "charge": 1
       },
@@ -54,8 +68,8 @@
       "symbol": "L²",
       "category": "Quantum mechanics",
       "type": "quantum",
-      "x": 0,
-      "y": 340,
+      "x": 210,
+      "y": 330,
       "params": {
         "ell": 3,
         "m": 0
@@ -83,7 +97,7 @@
       "symbol": "Y",
       "category": "Quantum mechanics",
       "type": "quantum",
-      "x": 210,
+      "x": 420,
       "y": 340,
       "params": {},
       "source": null
@@ -96,7 +110,7 @@
       "category": "Quantum mechanics",
       "type": "quantum",
       "x": 420,
-      "y": 340,
+      "y": 510,
       "params": {},
       "source": null
     },
@@ -108,7 +122,7 @@
       "category": "Quantum mechanics",
       "type": "quantum",
       "x": 630,
-      "y": 340,
+      "y": 420,
       "params": {},
       "source": null
     },
@@ -161,7 +175,7 @@
       "y": 250,
       "params": {},
       "source": {
-        "id": "density",
+        "id": "position",
         "port": "out"
       },
       "orbitalCloud": true
@@ -234,7 +248,12 @@
       "port": "radial"
     },
     {
-      "from": "density",
+      "from": "position",
+      "to": "density",
+      "port": "observable"
+    },
+    {
+      "from": "position",
       "to": "sphere",
       "port": "density"
     }
