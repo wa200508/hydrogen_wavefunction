@@ -1,0 +1,192 @@
+{
+  "id": "ba7674b4-77fc-4318-8619-e56ac5b9f8a4",
+  "name": "Hydrogen 1s ground state",
+  "branch": "main",
+  "engine": "symbolic-distributions/v2",
+  "iterations": 1,
+  "samples": 10000,
+  "seed": 42,
+  "nodes": [
+    {
+      "id": "radius",
+      "category": "Random",
+      "name": "Electron radius (a₀)",
+      "type": "random",
+      "symbol": "Γ",
+      "op": "gamma",
+      "x": 15,
+      "y": 30,
+      "params": {
+        "shape": 3,
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "mean": 0,
+        "sigma": 1,
+        "lambda": 2,
+        "p": 0.5,
+        "r": 3.9,
+        "expression": "x^2",
+        "a": 2,
+        "b": 2,
+        "steps": 12,
+        "variable": "x"
+      },
+      "source": null
+    },
+    {
+      "id": "inside",
+      "category": "Logic",
+      "name": "Inside probe sphere?",
+      "type": "logic",
+      "symbol": "<",
+      "op": "less",
+      "x": 315,
+      "y": 30,
+      "params": {
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "mean": 0,
+        "sigma": 1,
+        "lambda": 1,
+        "p": 0.5,
+        "r": 3.9,
+        "expression": "x^2",
+        "a": 2,
+        "b": 2,
+        "steps": 12,
+        "variable": "x"
+      },
+      "source": null
+    },
+    {
+      "id": "insideTap",
+      "category": "Dynamics",
+      "name": "Inside = 1, outside = 0",
+      "type": "tap",
+      "symbol": "▥",
+      "op": "tap",
+      "x": 550,
+      "y": 30,
+      "params": {
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "mean": 0,
+        "sigma": 1,
+        "lambda": 1,
+        "p": 0.5,
+        "r": 3.9,
+        "expression": "x^2",
+        "a": 2,
+        "b": 2,
+        "steps": 12,
+        "variable": "x"
+      },
+      "source": {
+        "id": "inside",
+        "port": "out"
+      }
+    },
+    {
+      "id": "radialTap",
+      "category": "Dynamics",
+      "name": "Radial probability (a₀)",
+      "type": "tap",
+      "symbol": "▥",
+      "op": "tap",
+      "x": 15,
+      "y": 235,
+      "params": {
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "mean": 0,
+        "sigma": 1,
+        "lambda": 1,
+        "p": 0.5,
+        "r": 3.9,
+        "expression": "x^2",
+        "a": 2,
+        "b": 2,
+        "steps": 12,
+        "variable": "x"
+      },
+      "source": {
+        "id": "radius",
+        "port": "out"
+      },
+      "orbitalCloud": true
+    },
+    {
+      "id": "probe",
+      "category": "Math",
+      "name": "Probe radius (a₀)",
+      "type": "parameter",
+      "symbol": "#",
+      "op": "constant",
+      "x": 315,
+      "y": 235,
+      "params": {
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "mean": 0,
+        "sigma": 1,
+        "lambda": 1,
+        "p": 0.5,
+        "r": 3.9,
+        "expression": "x^2",
+        "a": 2,
+        "b": 2,
+        "steps": 12,
+        "variable": "x"
+      },
+      "source": null
+    },
+    {
+      "id": "psi",
+      "category": "Functions",
+      "name": "1s amplitude (a₀⁻³ᐟ²)",
+      "type": "function",
+      "symbol": "ƒ",
+      "op": "custom",
+      "x": 550,
+      "y": 235,
+      "params": {
+        "value": 1,
+        "min": 0,
+        "max": 1,
+        "mean": 0,
+        "sigma": 1,
+        "lambda": 1,
+        "p": 0.5,
+        "r": 3.9,
+        "expression": "exp(-x)/sqrt(pi)",
+        "a": 2,
+        "b": 2,
+        "steps": 12,
+        "variable": "x"
+      },
+      "source": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "radius",
+      "to": "inside",
+      "port": "x"
+    },
+    {
+      "from": "probe",
+      "to": "inside",
+      "port": "b"
+    },
+    {
+      "from": "probe",
+      "to": "psi",
+      "port": "x"
+    }
+  ]
+}
