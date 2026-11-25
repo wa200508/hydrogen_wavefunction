@@ -6,7 +6,7 @@ Open **Version history** in Chaos Lab to explore the 20 hydrogen designs in this
 
 The connected Hamiltonian and eigenstate solvers give $E=-1/32$ Hartree for this state.
 
-On the canvas, teal **Position law** marks where the Born rule defines the distribution of electron positions. Amber **Detection sampler** marks the tap that draws positions for the projected cloud. The central slice evaluates the density directly.
+The purple **Electron position X** block declares the three-dimensional quantity in Bohr radii. Open its inspector to see **Born density** as its law provider. The sphere measurement and spatial tap both observe X. Projected detections draw from the final law; the central slice evaluates the density directly.
 
 ![Chaos Lab dashboard with the 4d model, m = 2, open in version history](dashboard.png)
 
