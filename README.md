@@ -2,7 +2,15 @@
 
 Open **Version history** in Chaos Lab to explore the 20 hydrogen designs in this repository. The original 1s example is on `main`. Each of the 19 excited states in [Sebastian Mag’s cross-section diagram](https://github.com/ssebastianmag/hydrogen-wavefunctions/blob/main/figures/hydrogen_probability_densities.png) branches directly from that example. The diagram accompanies [the article](https://ssebastianmag.medium.com/computational-physics-with-python-hydrogen-wavefunctions-electron-density-plots-8fede44b7b12).
 
-![Orbital cross-sections on the nineteen branches](atlas.png)
+## Hydrogen 4d (n = 4, ℓ = 2, m = 2)
+
+![Chaos Lab dashboard with the 4d model, m = 2, open in version history](dashboard.png)
+
+Radial nodes: 1. Polar nodes: 0. Plot half-width: 32 Bohr radii.
+
+![Central density slice for hydrogen 4d, m = 2, exported from Chaos Lab](orbital.png)
+
+[View the atlas of all 19 excited states](atlas.png)
 
 ## Open the Git dashboard
 
@@ -15,10 +23,6 @@ python studio.py
 ```
 
 On Windows you can use `py studio.py`. On Linux you can use `python3 studio.py`. The first launch downloads the pinned Chaos Lab browser build. Double-click a commit to open it in a tab. Open another and use **Split view** to compare them. **Orbital cloud ↗** opens the spatial plots. The launcher reads the Git objects from your clone, including origin branches. Run `git fetch origin` and restart the launcher to load new remote branches.
-
-The dashboard shows four lobes separated by nodes for the (3, 2, 1) meridian slice.
-
-![Chaos Lab density slice for the 3d orbital with m = 1](dashboard-3d-m1.png)
 
 To compare states with the same radial law, open `orbital/2p-m0` and `orbital/2p-m1`. At the same radius their enclosed-probability probes agree. The first slice is dark on the equatorial plane, while the second is dark along the polar axis.
 
@@ -52,9 +56,3 @@ Coordinates are in Bohr radii. These are normalized fixed-proton, nonrelativisti
 |4|3|1|[orbital/4f-m1](https://github.com/wa200508/hydrogen_wavefunction/tree/orbital/4f-m1)|
 |4|3|2|[orbital/4f-m2](https://github.com/wa200508/hydrogen_wavefunction/tree/orbital/4f-m2)|
 |4|3|3|[orbital/4f-m3](https://github.com/wa200508/hydrogen_wavefunction/tree/orbital/4f-m3)|
-
-## Current design (4, 2, 2)
-
-![Meridian density of this eigenstate](orbital.png)
-
-Radial nodes: 1. Polar nodes: 0. Plot half-width: 32 Bohr radii.
