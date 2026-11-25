@@ -6,6 +6,8 @@ Open **Version history** in Chaos Lab to explore the 20 hydrogen designs in this
 
 The connected Hamiltonian and eigenstate solvers give $E=-1/8$ Hartree for this state.
 
+On the canvas, teal **Position law** marks where the Born rule defines the distribution of electron positions. Amber **Detection sampler** marks the tap that draws positions for the projected cloud. The central slice evaluates the density directly.
+
 ![Chaos Lab dashboard with the 2s model, m = 0, open in version history](dashboard.png)
 
 Radial nodes: 1. Polar nodes: 0. Plot half-width: 8 Bohr radii.
