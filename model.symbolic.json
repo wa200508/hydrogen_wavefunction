@@ -113,8 +113,24 @@
       "equation": "ρ = ψ*ψ",
       "derivation": "The azimuthal phase cancels under complex conjugation. Integrate with volume element r² dr d(cos θ) dφ.",
       "kind": "born",
+      "observable": "position",
       "inputs": {
-        "state": "normalized"
+        "state": "normalized",
+        "observable": "position"
+      }
+    },
+    "position": {
+      "n": 4,
+      "extent": 32,
+      "cdf": "1-exp(-((2*(1)*(1)/4)*r))*(41472+(41472)*(((2*(1)*(1)/4)*r))^1+(20736)*(((2*(1)*(1)/4)*r))^2+(15552)*(((2*(1)*(1)/4)*r))^4+(-10368)*(((2*(1)*(1)/4)*r))^5+(3744)*(((2*(1)*(1)/4)*r))^6+(-576)*(((2*(1)*(1)/4)*r))^7+(36)*(((2*(1)*(1)/4)*r))^8)/41472",
+      "density": "(((exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^0*(144+(-216)*(((2*(1)*(1)/4)*r))^1+(72)*(((2*(1)*(1)/4)*r))^2+(-6)*(((2*(1)*(1)/4)*r))^3))*((1-u^2)^(0/2)*(1)/1))/sqrt(((41472/((2*(1)*(1)/4))^3))*((4*pi*1/(1*1)))))^2",
+      "equation": "ρ = ψ*ψ",
+      "derivation": "The azimuthal phase cancels under complex conjugation. Integrate with volume element r² dr d(cos θ) dφ.",
+      "kind": "born",
+      "observable": "position",
+      "inputs": {
+        "state": "normalized",
+        "observable": "position"
       }
     },
     "sphere": {
@@ -123,7 +139,7 @@
       "derivation": "1-exp(-((2*(1)*(1)/4)*r))*(41472+(41472)*(((2*(1)*(1)/4)*r))^1+(20736)*(((2*(1)*(1)/4)*r))^2+(15552)*(((2*(1)*(1)/4)*r))^4+(-10368)*(((2*(1)*(1)/4)*r))^5+(3744)*(((2*(1)*(1)/4)*r))^6+(-576)*(((2*(1)*(1)/4)*r))^7+(36)*(((2*(1)*(1)/4)*r))^8)/41472",
       "kind": "sphereMass",
       "inputs": {
-        "density": "density"
+        "density": "position"
       }
     },
     "field": {
@@ -134,8 +150,10 @@
       "equation": "ρ = ψ*ψ",
       "derivation": "The azimuthal phase cancels under complex conjugation. Integrate with volume element r² dr d(cos θ) dφ.",
       "kind": "born",
+      "observable": "position",
       "inputs": {
-        "state": "normalized"
+        "state": "normalized",
+        "observable": "position"
       }
     },
     "insideTap": {
@@ -144,8 +162,160 @@
       "derivation": "1-exp(-((2*(1)*(1)/4)*r))*(41472+(41472)*(((2*(1)*(1)/4)*r))^1+(20736)*(((2*(1)*(1)/4)*r))^2+(15552)*(((2*(1)*(1)/4)*r))^4+(-10368)*(((2*(1)*(1)/4)*r))^5+(3744)*(((2*(1)*(1)/4)*r))^6+(-576)*(((2*(1)*(1)/4)*r))^7+(36)*(((2*(1)*(1)/4)*r))^8)/41472",
       "kind": "sphereMass",
       "inputs": {
-        "density": "density"
+        "density": "position"
       }
+    }
+  },
+  "quantities": {
+    "position": {
+      "domain": "space3",
+      "resolved": true,
+      "units": "a₀",
+      "subsystem": "",
+      "declared": true,
+      "origin": "system",
+      "sources": [
+        "position"
+      ],
+      "canceled": [],
+      "provider": "density"
+    },
+    "kinetic": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "potential": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "H": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "basis": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "radial": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "angular": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "psi": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "normalized": {
+      "domain": "operator",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "density": {
+      "domain": "space3",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [
+        "position"
+      ],
+      "canceled": []
+    },
+    "energy": {
+      "domain": "real",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "sphere": {
+      "domain": "real",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": []
+    },
+    "field": {
+      "domain": "space3",
+      "resolved": true,
+      "units": "a₀",
+      "subsystem": "",
+      "declared": false,
+      "origin": "system",
+      "sources": [
+        "position"
+      ],
+      "canceled": [],
+      "provider": "density",
+      "observed": "position"
+    },
+    "insideTap": {
+      "domain": "real",
+      "resolved": true,
+      "units": "",
+      "subsystem": "",
+      "declared": false,
+      "origin": "derived",
+      "sources": [],
+      "canceled": [],
+      "observed": "sphere"
     }
   },
   "sourceSemantics": "Distinct source blocks are independent; all uses of one source retain its identity, including feedback iterations.",
