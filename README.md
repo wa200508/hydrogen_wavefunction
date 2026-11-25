@@ -4,6 +4,8 @@ Open **Version history** in Chaos Lab to explore the 20 hydrogen designs in this
 
 ## Hydrogen 1s (n = 1, ℓ = 0, m = 0)
 
+The connected Hamiltonian and eigenstate solvers give $E=-1/2$ Hartree for this state.
+
 ![Chaos Lab dashboard with the 1s model, m = 0, open in version history](dashboard.png)
 
 Each dot is a simulated electron position drawn from the 1s probability law and projected onto the image plane.
@@ -22,7 +24,7 @@ cd hydrogen_wavefunction
 python studio.py
 ```
 
-On Windows you can use `py studio.py`. On Linux you can use `python3 studio.py`. The first launch downloads the pinned Chaos Lab browser build. Double-click a commit to open it in a tab. Open another and use **Split view** to compare them. **Orbital cloud ↗** opens the spatial plots. The launcher reads the Git objects from your clone, including origin branches. Run `git fetch origin` and restart the launcher to load new remote branches.
+On Windows you can use `py studio.py`. On Linux you can use `python3 studio.py`. The first launch downloads the pinned Chaos Lab browser build. Double-click a commit to open it in a tab. Open another and use **Split view** to compare them. **Orbital cloud ↗** opens the spatial plots. The launcher reads the Git objects from your clone, including origin branches. For an existing clone, update the checked-out branch with `git pull --ff-only`, fetch the other branches with `git fetch origin`, and restart the launcher. Double-click the latest commit for the design you want to explore.
 
 To compare states with the same radial law, open `orbital/2p-m0` and `orbital/2p-m1`. At the same radius their enclosed-probability probes agree. The first slice is dark on the equatorial plane, while the second is dark along the polar axis.
 
@@ -32,7 +34,17 @@ To compare states with the same radial law, open `orbital/2p-m0` and `orbital/2p
 
 Branch names encode `(n, ℓ, m)`. For example, `orbital/3d-m1` is `(3,2,1)`. Each snapshot includes the editable graph, its compiled symbolic representation, and its SysML text. Each excited-state branch also contains a reference cross-section.
 
-Coordinates are in Bohr radii. These are normalized fixed-proton, nonrelativistic spatial eigenstates in the complex spherical-harmonic basis. For a fixed m the azimuthal phase is exp(i m φ), so probability density is axially symmetric. The graph evaluates the real meridian amplitude at φ = 0 using radius r and u = cos θ. Its square is probability per unit volume. The sphere probe integrates the radial Born law. The field tap sweeps the same amplitude expression for the x–z slice and its projected detections. Detections are drawn for display from a numerical grid of the final density including the r² volume factor. Brightness and plotting windows are scaled per orbital.
+## How the graph derives this orbital
+
+1. **Kinetic energy** and **Coulomb potential** supply the relative-coordinate operators in atomic units. Their wires feed **Hamiltonian**, which constructs $H=-\nabla^2/(2\mu)-Z/r$. The default is a fixed proton, $Z=\mu=1$.
+2. **Angular momentum** selects the joint eigenvalues of $L^2$ and $L_z$. **Radial eigenproblem** uses that angular eigenvalue in the centrifugal term. Regularity at the origin, decay at infinity, and radial-series termination give the polynomial and energy. **Angular eigenproblem** constructs the polar polynomial by Rodrigues differentiation and includes the phase $e^{im\phi}$.
+3. **Stationary state** multiplies the separated basis functions. **Normalize state** computes their norm with the spherical volume measure. **Born density** takes the squared modulus of the normalized state. **Sphere probability** integrates that density to the probe radius.
+4. Select a block to inspect its equation and derivation. Change **Nuclear charge** from 1 to 2. The energy becomes four times more negative and the orbital contracts by a factor of two. The plot rescales with the orbital, so use its Bohr-radius scale bar to see the change.
+
+The central slice evaluates the final density in the x–z plane. Projected detections sample the final density on a finite radial and angular grid with the spherical volume factor. Coordinates use Bohr radii and energy uses Hartree.
+
+The branch stores the operator graph in `model.json`, its derived fields and scalar laws in `model.symbolic.json`, and the block connections in `model.sysml`. With SymPy installed, run `python tools/verify_state.py` in a checkout of this branch to check the eigenvalue equations, normalization, radial reference solution and sphere integral.
+
 
 | n | ℓ | m | Design branch |
 |---|---|---|---|
