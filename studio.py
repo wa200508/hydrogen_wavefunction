@@ -10,7 +10,7 @@ import tempfile
 import webbrowser
 
 ROOT = Path(__file__).resolve().parent
-STUDIO_REV = "1cc30c5632f1fe1f79a11ab6730f82c36a6c01e4"
+STUDIO_REV = "8657d6ecd3aa33a5a28f43219d5d6bfb8aa3edcc"
 STUDIO_REPO = "https://github.com/wa200508/chaos_lab.git"
 
 
