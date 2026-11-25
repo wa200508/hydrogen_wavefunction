@@ -8,165 +8,174 @@
   "seed": 42,
   "nodes": [
     {
-      "id": "probe",
-      "category": "Math",
-      "name": "Radius r (a₀)",
-      "type": "parameter",
-      "symbol": "#",
-      "op": "constant",
-      "x": 10,
-      "y": 25,
+      "id": "kinetic",
+      "op": "kinetic",
+      "name": "Kinetic energy",
+      "symbol": "T",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 0,
+      "y": 10,
       "params": {
-        "value": 9,
-        "min": 0,
-        "max": 1,
-        "mean": 0,
-        "sigma": 1,
-        "lambda": 1,
-        "p": 0.5,
-        "r": 3.9,
-        "expression": "x^2",
-        "a": 2,
-        "b": 2,
-        "steps": 12,
-        "variable": "x"
+        "mass": 1
       },
       "source": null
     },
     {
-      "id": "polar",
-      "category": "Math",
-      "name": "cos θ",
-      "type": "parameter",
-      "symbol": "#",
-      "op": "constant",
-      "x": 10,
-      "y": 220,
+      "id": "potential",
+      "op": "coulomb",
+      "name": "Coulomb potential",
+      "symbol": "V",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 0,
+      "y": 160,
       "params": {
-        "value": 0.5,
-        "min": 0,
-        "max": 1,
-        "mean": 0,
-        "sigma": 1,
-        "lambda": 1,
-        "p": 0.5,
-        "r": 3.9,
-        "expression": "x^2",
-        "a": 2,
-        "b": 2,
-        "steps": 12,
-        "variable": "x"
+        "charge": 1
       },
+      "source": null
+    },
+    {
+      "id": "H",
+      "op": "hamiltonian",
+      "name": "Hamiltonian",
+      "symbol": "Ĥ",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 210,
+      "y": 10,
+      "params": {},
+      "source": null
+    },
+    {
+      "id": "basis",
+      "op": "angularBasis",
+      "name": "Angular momentum",
+      "symbol": "L²",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 0,
+      "y": 340,
+      "params": {
+        "ell": 1,
+        "m": 1
+      },
+      "source": null
+    },
+    {
+      "id": "radial",
+      "op": "radialEigen",
+      "name": "Radial eigenproblem",
+      "symbol": "R",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 420,
+      "y": 10,
+      "params": {
+        "n": 3
+      },
+      "source": null
+    },
+    {
+      "id": "angular",
+      "op": "angularEigen",
+      "name": "Angular eigenproblem",
+      "symbol": "Y",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 210,
+      "y": 340,
+      "params": {},
       "source": null
     },
     {
       "id": "psi",
-      "category": "Functions",
-      "name": "Meridian amplitude",
-      "type": "function",
-      "symbol": "ƒ",
-      "op": "custom",
-      "x": 250,
-      "y": 25,
-      "params": {
-        "value": 1,
-        "min": 0,
-        "max": 1,
-        "mean": 0,
-        "sigma": 1,
-        "lambda": 1,
-        "p": 0.5,
-        "r": 3.9,
-        "expression": "-r*sqrt(1 - u^2)*(4 - 2*r/3)*exp(-r/3)/(54*sqrt(pi))",
-        "a": 2,
-        "b": 2,
-        "steps": 12,
-        "variable": "x"
-      },
+      "op": "eigenstate",
+      "name": "Stationary state",
+      "symbol": "ψ",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 420,
+      "y": 340,
+      "params": {},
+      "source": null
+    },
+    {
+      "id": "normalized",
+      "op": "normalizeState",
+      "name": "Normalize state",
+      "symbol": "N",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 630,
+      "y": 340,
+      "params": {},
+      "source": null
+    },
+    {
+      "id": "density",
+      "op": "born",
+      "name": "Born density",
+      "symbol": "ρ",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 630,
+      "y": 180,
+      "params": {},
+      "source": null
+    },
+    {
+      "id": "energy",
+      "op": "eigenenergy",
+      "name": "Eigenenergy",
+      "symbol": "E",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 420,
+      "y": 175,
+      "params": {},
       "source": null
     },
     {
       "id": "sphere",
-      "category": "Functions",
-      "name": "P(inside sphere)",
-      "type": "function",
-      "symbol": "ƒ",
-      "op": "custom",
-      "x": 250,
-      "y": 235,
+      "op": "sphereMass",
+      "name": "Sphere probability",
+      "symbol": "∫",
+      "category": "Quantum mechanics",
+      "type": "quantum",
+      "x": 630,
+      "y": 10,
       "params": {
-        "value": 1,
-        "min": 0,
-        "max": 1,
-        "mean": 0,
-        "sigma": 1,
-        "lambda": 1,
-        "p": 0.5,
-        "r": 3.9,
-        "expression": "-(4*r^6/6561 - 4*r^5/2187 + 2*r^4/243 + 4*r^3/81 + 2*r^2/9 + 2*r/3 + 1)*exp(-2*r/3) + 1",
-        "a": 2,
-        "b": 2,
-        "steps": 12,
-        "variable": "x"
+        "radius": 9
       },
       "source": null
     },
     {
       "id": "field",
       "category": "Dynamics",
-      "name": "Orbital density",
+      "name": "Position density",
       "type": "tap",
       "symbol": "▥",
       "op": "tap",
-      "x": 550,
-      "y": 25,
-      "params": {
-        "value": 1,
-        "min": 0,
-        "max": 1,
-        "mean": 0,
-        "sigma": 1,
-        "lambda": 1,
-        "p": 0.5,
-        "r": 3.9,
-        "expression": "x^2",
-        "a": 2,
-        "b": 2,
-        "steps": 12,
-        "variable": "x"
-      },
+      "x": 840,
+      "y": 250,
+      "params": {},
       "source": {
-        "id": "psi",
+        "id": "density",
         "port": "out"
       },
-      "meridian": {
-        "extent": 18
-      }
+      "orbitalCloud": true
     },
     {
-      "id": "enclosed",
+      "id": "insideTap",
       "category": "Dynamics",
       "name": "Enclosed probability",
       "type": "tap",
       "symbol": "▥",
       "op": "tap",
-      "x": 550,
-      "y": 295,
-      "params": {
-        "value": 1,
-        "min": 0,
-        "max": 1,
-        "mean": 0,
-        "sigma": 1,
-        "lambda": 1,
-        "p": 0.5,
-        "r": 3.9,
-        "expression": "x^2",
-        "a": 2,
-        "b": 2,
-        "steps": 12,
-        "variable": "x"
-      },
+      "x": 840,
+      "y": 10,
+      "params": {},
       "source": {
         "id": "sphere",
         "port": "out"
@@ -175,24 +184,59 @@
   ],
   "edges": [
     {
-      "from": "probe",
-      "to": "psi",
-      "port": "r"
+      "from": "kinetic",
+      "to": "H",
+      "port": "kinetic"
     },
     {
-      "from": "probe",
+      "from": "potential",
+      "to": "H",
+      "port": "potential"
+    },
+    {
+      "from": "H",
+      "to": "radial",
+      "port": "H"
+    },
+    {
+      "from": "basis",
+      "to": "radial",
+      "port": "basis"
+    },
+    {
+      "from": "basis",
+      "to": "angular",
+      "port": "basis"
+    },
+    {
+      "from": "radial",
+      "to": "psi",
+      "port": "R"
+    },
+    {
+      "from": "angular",
+      "to": "psi",
+      "port": "Y"
+    },
+    {
+      "from": "psi",
+      "to": "normalized",
+      "port": "state"
+    },
+    {
+      "from": "normalized",
+      "to": "density",
+      "port": "state"
+    },
+    {
+      "from": "radial",
+      "to": "energy",
+      "port": "radial"
+    },
+    {
+      "from": "density",
       "to": "sphere",
-      "port": "r"
-    },
-    {
-      "from": "polar",
-      "to": "psi",
-      "port": "u"
+      "port": "density"
     }
-  ],
-  "quantumNumbers": {
-    "n": 3,
-    "l": 1,
-    "m": 1
-  }
+  ]
 }
