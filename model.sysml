@@ -10,113 +10,107 @@ package Hydrogen_4p_m1__4__1__1_ {
         port output : Signal;
     }
 
+    item def QuantumValue;
+    port def QuantumSignal { out item value : QuantumValue; }
+    part def QuantumBlock { port output : QuantumSignal; }
+
     part model {
         attribute visualizationDrawCount : Integer = 10000;
         attribute iterations : Integer = 1;
         attribute visualizationSeed : Integer = 42;
 
-        part probe : Block {
-            doc /* Radius r (a₀) | constant */
-            attribute value : Real = 16;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
+        part kinetic : QuantumBlock {
+            doc /* Kinetic energy | kinetic */
+            attribute mass : Real = 1;
         }
 
-        part polar : Block {
-            doc /* cos θ | constant */
-            attribute value : Real = 0.5;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
+        part potential : QuantumBlock {
+            doc /* Coulomb potential | coulomb */
+            attribute charge : Real = 1;
         }
 
-        part psi : Block {
-            doc /* Meridian amplitude | custom */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute default_r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
-            port r : ~Signal;
-            doc /* r: Input variable r. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 3.9. */
-            port u : ~Signal;
-            doc /* u: Input variable u. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 0. */
-            doc /* expression: -sqrt(10)*r*sqrt(1 - u^2)*(r^2/8 - 5*r/2 + 10)*exp(-r/4)/(640*sqrt(pi)) */
+        part H : QuantumBlock {
+            doc /* Hamiltonian | hamiltonian */
+            port kinetic : ~QuantumSignal;
+            doc /* kinetic: Required Kinetic energy output. Default: required. */
+            port potential : ~QuantumSignal;
+            doc /* potential: Required Coulomb potential output. Default: required. */
+        }
+
+        part basis : QuantumBlock {
+            doc /* Angular momentum | angularBasis */
+            attribute ell : Real = 1;
+            attribute m : Real = 1;
+        }
+
+        part radial : QuantumBlock {
+            doc /* Radial eigenproblem | radialEigen */
+            attribute n : Real = 4;
+            port H : ~QuantumSignal;
+            doc /* H: Required Hamiltonian output. Default: required. */
+            port basis : ~QuantumSignal;
+            doc /* basis: Required Angular momentum output. Default: required. */
+        }
+
+        part angular : QuantumBlock {
+            doc /* Angular eigenproblem | angularEigen */
+            port basis : ~QuantumSignal;
+            doc /* basis: Required Angular momentum output. Default: required. */
+        }
+
+        part psi : QuantumBlock {
+            doc /* Stationary state | eigenstate */
+            port R : ~QuantumSignal;
+            doc /* R: Required Radial eigenproblem output. Default: required. */
+            port Y : ~QuantumSignal;
+            doc /* Y: Required Angular eigenproblem output. Default: required. */
+        }
+
+        part normalized : QuantumBlock {
+            doc /* Normalize state | normalizeState */
+            port state : ~QuantumSignal;
+            doc /* state: Required Stationary state output. Default: required. */
+        }
+
+        part density : QuantumBlock {
+            doc /* Born density | born */
+            port state : ~QuantumSignal;
+            doc /* state: Required Normalize state output. Default: required. */
+        }
+
+        part energy : Block {
+            doc /* Eigenenergy | eigenenergy */
+            port radial : ~QuantumSignal;
+            doc /* radial: Required Radial eigenproblem output. Default: required. */
         }
 
         part sphere : Block {
-            doc /* P(inside sphere) | custom */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute default_r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
-            port r : ~Signal;
-            doc /* r: Input variable r. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 3.9. */
-            doc /* expression: -(r^8/491520 - r^7/20480 + 7*r^6/15360 - r^5/960 + r^4/384 + r^3/48 + r^2/8 + r/2 + 1)*exp(-r/2) + 1 */
+            doc /* Sphere probability | sphereMass */
+            attribute radius : Real = 16;
+            port density : ~QuantumSignal;
+            doc /* density: Required Born density output. Default: required. */
         }
 
         part field : Block {
-            doc /* Orbital density | tap */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
-            doc /* Visualization observes psi.output. */
+            doc /* Position density | tap */
+            doc /* Visualization observes density.output. */
         }
 
-        part enclosed : Block {
+        part insideTap : Block {
             doc /* Enclosed probability | tap */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
             doc /* Visualization observes sphere.output. */
         }
 
-        connect probe.output to psi.r;
-        connect probe.output to sphere.r;
-        connect polar.output to psi.u;
+        connect kinetic.output to H.kinetic;
+        connect potential.output to H.potential;
+        connect H.output to radial.H;
+        connect basis.output to radial.basis;
+        connect basis.output to angular.basis;
+        connect radial.output to psi.R;
+        connect angular.output to psi.Y;
+        connect psi.output to normalized.state;
+        connect normalized.output to density.state;
+        connect radial.output to energy.radial;
+        connect density.output to sphere.density;
     }
 }
