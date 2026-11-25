@@ -1,4 +1,4 @@
-package Hydrogen_1s_ground_state {
+package Hydrogen_4f_m2__4__3__2_ {
     private import ScalarValues::*;
     doc /* Engine: symbolic-distributions/v2. Ports denote symbolic random variables; numerical evaluation occurs only at visualization taps. */
 
@@ -15,76 +15,24 @@ package Hydrogen_1s_ground_state {
         attribute iterations : Integer = 1;
         attribute visualizationSeed : Integer = 42;
 
-        part radius : Block {
-            doc /* Electron radius (a₀) | gamma */
-            attribute shape : Real = 3;
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 2;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
-        }
-
-        part inside : Block {
-            doc /* Inside probe sphere? | less */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute default_b : Real = 2;
-            attribute steps : Real = 12;
-            port x : ~Signal;
-            doc /* x: First operand: a symbolic random variable. Default: 1/2. */
-            port b : ~Signal;
-            doc /* b: Second operand. The inspector default is used when unconnected. Default: 2. */
-        }
-
-        part insideTap : Block {
-            doc /* Inside = 1, outside = 0 | tap */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
-            doc /* Visualization observes inside.output. */
-        }
-
-        part radialTap : Block {
-            doc /* Radial probability (a₀) | tap */
-            attribute value : Real = 1;
-            attribute min : Real = 0;
-            attribute max : Real = 1;
-            attribute mean : Real = 0;
-            attribute sigma : Real = 1;
-            attribute lambda : Real = 1;
-            attribute p : Real = 0.5;
-            attribute r : Real = 3.9;
-            attribute a : Real = 2;
-            attribute b : Real = 2;
-            attribute steps : Real = 12;
-            doc /* Visualization observes radius.output. */
-        }
-
         part probe : Block {
-            doc /* Probe radius (a₀) | constant */
-            attribute value : Real = 1;
+            doc /* Radius r (a₀) | constant */
+            attribute value : Real = 16;
+            attribute min : Real = 0;
+            attribute max : Real = 1;
+            attribute mean : Real = 0;
+            attribute sigma : Real = 1;
+            attribute lambda : Real = 1;
+            attribute p : Real = 0.5;
+            attribute r : Real = 3.9;
+            attribute a : Real = 2;
+            attribute b : Real = 2;
+            attribute steps : Real = 12;
+        }
+
+        part polar : Block {
+            doc /* cos θ | constant */
+            attribute value : Real = 0.5;
             attribute min : Real = 0;
             attribute max : Real = 1;
             attribute mean : Real = 0;
@@ -98,7 +46,45 @@ package Hydrogen_1s_ground_state {
         }
 
         part psi : Block {
-            doc /* 1s amplitude (a₀⁻³ᐟ²) | custom */
+            doc /* Meridian amplitude | custom */
+            attribute value : Real = 1;
+            attribute min : Real = 0;
+            attribute max : Real = 1;
+            attribute mean : Real = 0;
+            attribute sigma : Real = 1;
+            attribute lambda : Real = 1;
+            attribute p : Real = 0.5;
+            attribute default_r : Real = 3.9;
+            attribute a : Real = 2;
+            attribute b : Real = 2;
+            attribute steps : Real = 12;
+            port r : ~Signal;
+            doc /* r: Input variable r. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 3.9. */
+            port u : ~Signal;
+            doc /* u: Input variable u. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 0. */
+            doc /* expression: sqrt(6)*r^3*u*(1 - u^2)*exp(-r/4)/(6144*sqrt(pi)) */
+        }
+
+        part sphere : Block {
+            doc /* P(inside sphere) | custom */
+            attribute value : Real = 1;
+            attribute min : Real = 0;
+            attribute max : Real = 1;
+            attribute mean : Real = 0;
+            attribute sigma : Real = 1;
+            attribute lambda : Real = 1;
+            attribute p : Real = 0.5;
+            attribute default_r : Real = 3.9;
+            attribute a : Real = 2;
+            attribute b : Real = 2;
+            attribute steps : Real = 12;
+            port r : ~Signal;
+            doc /* r: Input variable r. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 3.9. */
+            doc /* expression: -(r^8/10321920 + r^7/645120 + r^6/46080 + r^5/3840 + r^4/384 + r^3/48 + r^2/8 + r/2 + 1)*exp(-r/2) + 1 */
+        }
+
+        part field : Block {
+            doc /* Orbital density | tap */
             attribute value : Real = 1;
             attribute min : Real = 0;
             attribute max : Real = 1;
@@ -110,13 +96,27 @@ package Hydrogen_1s_ground_state {
             attribute a : Real = 2;
             attribute b : Real = 2;
             attribute steps : Real = 12;
-            port x : ~Signal;
-            doc /* x: Input variable x. Its wire carries a symbolic random variable; the default is used when unconnected. Default: 1/2. */
-            doc /* expression: exp(-x)/sqrt(pi) */
+            doc /* Visualization observes psi.output. */
         }
 
-        connect radius.output to inside.x;
-        connect probe.output to inside.b;
-        connect probe.output to psi.x;
+        part enclosed : Block {
+            doc /* Enclosed probability | tap */
+            attribute value : Real = 1;
+            attribute min : Real = 0;
+            attribute max : Real = 1;
+            attribute mean : Real = 0;
+            attribute sigma : Real = 1;
+            attribute lambda : Real = 1;
+            attribute p : Real = 0.5;
+            attribute r : Real = 3.9;
+            attribute a : Real = 2;
+            attribute b : Real = 2;
+            attribute steps : Real = 12;
+            doc /* Visualization observes sphere.output. */
+        }
+
+        connect probe.output to psi.r;
+        connect probe.output to sphere.r;
+        connect polar.output to psi.u;
     }
 }
