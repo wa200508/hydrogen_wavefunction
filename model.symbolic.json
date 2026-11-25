@@ -4,124 +4,82 @@
   "terms": [
     {
       "id": "t0",
-      "kind": "source",
-      "sourceId": "radius",
-      "family": "gamma",
-      "parameters": {
-        "shape": "3",
-        "lambda": "2"
-      },
-      "sourceIds": [
-        "radius"
-      ],
+      "kind": "constant",
+      "value": "9",
+      "sourceIds": [],
       "linear": {
-        "offset": "0",
-        "coefficients": {
-          "radius": "1"
-        }
+        "offset": "9",
+        "coefficients": {}
       },
       "cdf": {
-        "kind": "source",
-        "family": "gamma",
-        "parameters": {
-          "shape": "3",
-          "lambda": "2"
-        }
+        "kind": "dirac",
+        "at": "9"
       }
     },
     {
       "id": "t1",
       "kind": "constant",
-      "value": "1",
+      "value": "1/2",
       "sourceIds": [],
       "linear": {
-        "offset": "1",
+        "offset": "1/2",
         "coefficients": {}
       },
       "cdf": {
         "kind": "dirac",
-        "at": "1"
+        "at": "1/2"
       }
     },
     {
       "id": "t2",
       "kind": "constant",
-      "value": "e^(-1)*sqrt(pi)^(-1)",
+      "value": "-331*e^(-6)+1",
       "sourceIds": [],
       "linear": {
-        "offset": "e^(-1)*sqrt(pi)^(-1)",
+        "offset": "-331*e^(-6)+1",
         "coefficients": {}
       },
       "cdf": {
         "kind": "dirac",
-        "at": "e^(-1)*sqrt(pi)^(-1)"
+        "at": "-331*e^(-6)+1"
       }
     },
     {
       "id": "t3",
       "kind": "constant",
-      "value": "39/10",
+      "value": "(-1/6)*e^(-3)*sqrt(2)*sqrt(pi)^(-1)",
       "sourceIds": [],
       "linear": {
-        "offset": "39/10",
+        "offset": "(-1/6)*e^(-3)*sqrt(2)*sqrt(pi)^(-1)",
         "coefficients": {}
       },
       "cdf": {
         "kind": "dirac",
-        "at": "39/10"
-      }
-    },
-    {
-      "id": "t4",
-      "kind": "apply",
-      "operation": "less",
-      "inputs": {
-        "x": "t0",
-        "b": "t1"
-      },
-      "sourceIds": [
-        "radius"
-      ],
-      "cdf": {
-        "kind": "pushforward",
-        "operation": "less",
-        "inputs": {
-          "x": "t0",
-          "b": "t1"
-        },
-        "sourceIds": [
-          "radius"
-        ]
+        "at": "(-1/6)*e^(-3)*sqrt(2)*sqrt(pi)^(-1)"
       }
     }
   ],
   "outputs": {
-    "radius": {
+    "probe": {
       "root": "t0",
       "cdf": {
-        "kind": "source",
-        "family": "gamma",
-        "parameters": {
-          "shape": "3",
-          "lambda": "2"
-        }
+        "kind": "dirac",
+        "at": "9"
       },
       "definition": {
         "kind": "pushforward-measure",
         "map": "t0",
         "joint": {
           "kind": "independent-product",
-          "sourceIds": [
-            "radius"
-          ]
+          "sourceIds": []
         }
       }
     },
-    "probe": {
+    "polar": {
       "root": "t1",
       "cdf": {
         "kind": "dirac",
-        "at": "1"
+        "at": "1/2"
       },
       "definition": {
         "kind": "pushforward-measure",
@@ -132,11 +90,11 @@
         }
       }
     },
-    "psi": {
+    "sphere": {
       "root": "t2",
       "cdf": {
         "kind": "dirac",
-        "at": "e^(-1)*sqrt(pi)^(-1)"
+        "at": "-331*e^(-6)+1"
       },
       "definition": {
         "kind": "pushforward-measure",
@@ -147,72 +105,48 @@
         }
       }
     },
-    "inside": {
-      "root": "t4",
+    "psi": {
+      "root": "t3",
       "cdf": {
-        "kind": "pushforward",
-        "operation": "less",
-        "inputs": {
-          "x": "t0",
-          "b": "t1"
-        },
-        "sourceIds": [
-          "radius"
-        ]
+        "kind": "dirac",
+        "at": "(-1/6)*e^(-3)*sqrt(2)*sqrt(pi)^(-1)"
       },
       "definition": {
         "kind": "pushforward-measure",
-        "map": "t4",
+        "map": "t3",
         "joint": {
           "kind": "independent-product",
-          "sourceIds": [
-            "radius"
-          ]
+          "sourceIds": []
         }
       }
     },
-    "insideTap": {
-      "root": "t4",
+    "field": {
+      "root": "t3",
       "cdf": {
-        "kind": "pushforward",
-        "operation": "less",
-        "inputs": {
-          "x": "t0",
-          "b": "t1"
-        },
-        "sourceIds": [
-          "radius"
-        ]
+        "kind": "dirac",
+        "at": "(-1/6)*e^(-3)*sqrt(2)*sqrt(pi)^(-1)"
       },
       "definition": {
         "kind": "pushforward-measure",
-        "map": "t4",
+        "map": "t3",
         "joint": {
           "kind": "independent-product",
-          "sourceIds": [
-            "radius"
-          ]
+          "sourceIds": []
         }
       }
     },
-    "radialTap": {
-      "root": "t0",
+    "enclosed": {
+      "root": "t2",
       "cdf": {
-        "kind": "source",
-        "family": "gamma",
-        "parameters": {
-          "shape": "3",
-          "lambda": "2"
-        }
+        "kind": "dirac",
+        "at": "-331*e^(-6)+1"
       },
       "definition": {
         "kind": "pushforward-measure",
-        "map": "t0",
+        "map": "t2",
         "joint": {
           "kind": "independent-product",
-          "sourceIds": [
-            "radius"
-          ]
+          "sourceIds": []
         }
       }
     }
