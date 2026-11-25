@@ -52,3 +52,9 @@ Coordinates are in Bohr radii. These are normalized fixed-proton, nonrelativisti
 |4|3|1|[orbital/4f-m1](https://github.com/wa200508/hydrogen_wavefunction/tree/orbital/4f-m1)|
 |4|3|2|[orbital/4f-m2](https://github.com/wa200508/hydrogen_wavefunction/tree/orbital/4f-m2)|
 |4|3|3|[orbital/4f-m3](https://github.com/wa200508/hydrogen_wavefunction/tree/orbital/4f-m3)|
+
+## Current design (3, 2, 1)
+
+![Meridian density of this eigenstate](orbital.png)
+
+Radial nodes: 0. Polar nodes: 1. Plot half-width: 18 Bohr radii.
