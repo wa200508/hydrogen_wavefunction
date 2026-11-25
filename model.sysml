@@ -19,6 +19,13 @@ package Hydrogen_4f_m3__4__3__3_ {
         attribute iterations : Integer = 1;
         attribute visualizationSeed : Integer = 42;
 
+        part position : QuantumBlock {
+            doc /* Electron position X | quantity */
+            doc /* Quantity domain space3, units a₀. */
+            port law : ~QuantumSignal;
+            doc /* law: Bind an existing law to this declaration. Default: unbound. */
+        }
+
         part kinetic : QuantumBlock {
             doc /* Kinetic energy | kinetic */
             attribute mass : Real = 1;
@@ -76,6 +83,8 @@ package Hydrogen_4f_m3__4__3__3_ {
             doc /* Born density | born */
             port state : ~QuantumSignal;
             doc /* state: Required Normalize state output. Default: required. */
+            port observable : ~QuantumSignal;
+            doc /* observable: Spatial quantity whose position law this operator determines. Default: anonymous position. */
         }
 
         part energy : Block {
@@ -93,11 +102,13 @@ package Hydrogen_4f_m3__4__3__3_ {
 
         part field : Block {
             doc /* Position density | tap */
-            doc /* Visualization observes density.output. */
+            port observation : ~QuantumSignal;
+            doc /* Visualization observes position.output. */
         }
 
         part insideTap : Block {
             doc /* Enclosed probability | tap */
+            port observation : ~Signal;
             doc /* Visualization observes sphere.output. */
         }
 
@@ -111,6 +122,9 @@ package Hydrogen_4f_m3__4__3__3_ {
         connect psi.output to normalized.state;
         connect normalized.output to density.state;
         connect radial.output to energy.radial;
-        connect density.output to sphere.density;
+        connect position.output to density.observable;
+        connect position.output to sphere.density;
+        connect position.output to field.observation;
+        connect sphere.output to insideTap.observation;
     }
 }
