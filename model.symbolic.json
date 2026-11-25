@@ -1,37 +1,171 @@
 {
   "engine": "symbolic-distributions/v2",
+  "quantum": {
+    "basis": {
+      "ell": 2,
+      "m": 1,
+      "eigenvalue": 6,
+      "equation": "L² → 6 ℏ², Lz → 1 ℏ",
+      "derivation": "Joint eigenvalues of the commuting angular momentum operators.",
+      "kind": "angularBasis",
+      "inputs": {}
+    },
+    "potential": {
+      "charge": 1,
+      "equation": "V(r) = −1/r",
+      "derivation": "Attraction of an electron to a point nucleus.",
+      "kind": "coulomb",
+      "inputs": {}
+    },
+    "kinetic": {
+      "mass": 1,
+      "equation": "T = −∇²/(2·1)",
+      "derivation": "Relative-coordinate kinetic energy in atomic units.",
+      "kind": "kinetic",
+      "inputs": {}
+    },
+    "angular": {
+      "ell": 2,
+      "m": 1,
+      "expression": "((1-u^2)^(1/2)*((-24)*(u)^1)/8)/sqrt((4*pi*6/(5*1)))",
+      "basisFunction": "(1-u^2)^(1/2)*((-24)*(u)^1)/8",
+      "normSquared": "(4*pi*6/(5*1))",
+      "equation": "L²Y = 6Y, LzY = 1Y",
+      "derivation": "Periodic azimuth exp(i·1·φ). Regular polar solution by Rodrigues differentiation, normalized over solid angle. Y(θ,0) = ((1-u^2)^(1/2)*((-24)*(u)^1)/8)/sqrt((4*pi*6/(5*1)))",
+      "kind": "angularEigen",
+      "inputs": {
+        "basis": "basis"
+      }
+    },
+    "H": {
+      "mass": 1,
+      "charge": 1,
+      "equation": "H = −∇²/(2·1) − 1/r",
+      "derivation": "Central potential permits separation into radial and angular eigenproblems.",
+      "kind": "hamiltonian",
+      "inputs": {
+        "kinetic": "kinetic",
+        "potential": "potential"
+      }
+    },
+    "radial": {
+      "ell": 2,
+      "n": 4,
+      "expression": "(exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1))/sqrt((5760/((2*(1)*(1)/4))^3))",
+      "basisFunction": "exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1)",
+      "normSquared": "(5760/((2*(1)*(1)/4))^3)",
+      "energy": "-(1)*(1)^2/(2*4^2)",
+      "cdf": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "extent": 32,
+      "equation": "[−(∂²r + 2/r ∂r − 6/r²)/(2μ) − Z/r] R = E R",
+      "derivation": "Regular at r = 0 and normalizable at infinity. For s = 2κr, P(s) has degree p = 1. Its coefficients obey a[j+1]/a[j] = (j−p)/[(j+1)(j+2ℓ+2)]. κ = μZ/4, E = -(1)*(1)^2/(2*4^2) Hartree. R(r) = (exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1))/sqrt((5760/((2*(1)*(1)/4))^3))",
+      "kind": "radialEigen",
+      "inputs": {
+        "H": "H",
+        "basis": "basis"
+      }
+    },
+    "energy": {
+      "scalar": "-(1)*(1)^2/(2*4^2)",
+      "equation": "Bound-state energy (Hartree)",
+      "derivation": "-(1)*(1)^2/(2*4^2)",
+      "kind": "eigenenergy",
+      "inputs": {
+        "radial": "radial"
+      }
+    },
+    "psi": {
+      "n": 4,
+      "ell": 2,
+      "m": 1,
+      "extent": 32,
+      "cdf": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "normSquared": "((5760/((2*(1)*(1)/4))^3))*((4*pi*6/(5*1)))",
+      "amplitude": "(exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1))*((1-u^2)^(1/2)*((-24)*(u)^1)/8)",
+      "equation": "ψ = R(r) Y(θ,0) exp(i·1·φ)",
+      "derivation": "Separated radial and angular basis functions multiplied before normalization.",
+      "kind": "eigenstate",
+      "inputs": {
+        "R": "radial",
+        "Y": "angular"
+      }
+    },
+    "normalized": {
+      "n": 4,
+      "ell": 2,
+      "m": 1,
+      "extent": 32,
+      "cdf": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "normSquared": "((5760/((2*(1)*(1)/4))^3))*((4*pi*6/(5*1)))",
+      "amplitude": "((exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1))*((1-u^2)^(1/2)*((-24)*(u)^1)/8))/sqrt(((5760/((2*(1)*(1)/4))^3))*((4*pi*6/(5*1))))",
+      "equation": "⟨ψ|ψ⟩ = 1",
+      "derivation": "Divide by the square root of ∫r²|R|²dr × ∫|Y|²dΩ = ((5760/((2*(1)*(1)/4))^3))*((4*pi*6/(5*1))). The radial polynomial integrates term by term using exponential moments; the polar norm uses Legendre orthogonality.",
+      "kind": "normalizeState",
+      "inputs": {
+        "state": "psi"
+      }
+    },
+    "density": {
+      "n": 4,
+      "extent": 32,
+      "cdf": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "density": "(((exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1))*((1-u^2)^(1/2)*((-24)*(u)^1)/8))/sqrt(((5760/((2*(1)*(1)/4))^3))*((4*pi*6/(5*1)))))^2",
+      "equation": "ρ = ψ*ψ",
+      "derivation": "The azimuthal phase cancels under complex conjugation. Integrate with volume element r² dr d(cos θ) dφ.",
+      "kind": "born",
+      "inputs": {
+        "state": "normalized"
+      }
+    },
+    "sphere": {
+      "scalar": "1-exp(-((2*(1)*(1)/4)*(16)))*(5760+(5760)*(((2*(1)*(1)/4)*(16)))^1+(2880)*(((2*(1)*(1)/4)*(16)))^2+(960)*(((2*(1)*(1)/4)*(16)))^3+(240)*(((2*(1)*(1)/4)*(16)))^4+(48)*(((2*(1)*(1)/4)*(16)))^5+(8)*(((2*(1)*(1)/4)*(16)))^6+(-4)*(((2*(1)*(1)/4)*(16)))^7+(1)*(((2*(1)*(1)/4)*(16)))^8)/5760",
+      "equation": "P(r ≤ 16)",
+      "derivation": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "kind": "sphereMass",
+      "inputs": {
+        "density": "density"
+      }
+    },
+    "field": {
+      "n": 4,
+      "extent": 32,
+      "cdf": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "density": "(((exp(-((2*(1)*(1)/4)*r)/2)*((2*(1)*(1)/4)*r)^2*(6+(-1)*(((2*(1)*(1)/4)*r))^1))*((1-u^2)^(1/2)*((-24)*(u)^1)/8))/sqrt(((5760/((2*(1)*(1)/4))^3))*((4*pi*6/(5*1)))))^2",
+      "equation": "ρ = ψ*ψ",
+      "derivation": "The azimuthal phase cancels under complex conjugation. Integrate with volume element r² dr d(cos θ) dφ.",
+      "kind": "born",
+      "inputs": {
+        "state": "normalized"
+      }
+    },
+    "insideTap": {
+      "scalar": "1-exp(-((2*(1)*(1)/4)*(16)))*(5760+(5760)*(((2*(1)*(1)/4)*(16)))^1+(2880)*(((2*(1)*(1)/4)*(16)))^2+(960)*(((2*(1)*(1)/4)*(16)))^3+(240)*(((2*(1)*(1)/4)*(16)))^4+(48)*(((2*(1)*(1)/4)*(16)))^5+(8)*(((2*(1)*(1)/4)*(16)))^6+(-4)*(((2*(1)*(1)/4)*(16)))^7+(1)*(((2*(1)*(1)/4)*(16)))^8)/5760",
+      "equation": "P(r ≤ 16)",
+      "derivation": "1-exp(-((2*(1)*(1)/4)*r))*(5760+(5760)*(((2*(1)*(1)/4)*r))^1+(2880)*(((2*(1)*(1)/4)*r))^2+(960)*(((2*(1)*(1)/4)*r))^3+(240)*(((2*(1)*(1)/4)*r))^4+(48)*(((2*(1)*(1)/4)*r))^5+(8)*(((2*(1)*(1)/4)*r))^6+(-4)*(((2*(1)*(1)/4)*r))^7+(1)*(((2*(1)*(1)/4)*r))^8)/5760",
+      "kind": "sphereMass",
+      "inputs": {
+        "density": "density"
+      }
+    }
+  },
   "sourceSemantics": "Distinct source blocks are independent; all uses of one source retain its identity, including feedback iterations.",
   "terms": [
     {
       "id": "t0",
       "kind": "constant",
-      "value": "16",
+      "value": "-1/32",
       "sourceIds": [],
       "linear": {
-        "offset": "16",
+        "offset": "-1/32",
         "coefficients": {}
       },
       "cdf": {
         "kind": "dirac",
-        "at": "16"
+        "at": "-1/32"
       }
     },
     {
       "id": "t1",
-      "kind": "constant",
-      "value": "1/2",
-      "sourceIds": [],
-      "linear": {
-        "offset": "1/2",
-        "coefficients": {}
-      },
-      "cdf": {
-        "kind": "dirac",
-        "at": "1/2"
-      }
-    },
-    {
-      "id": "t2",
       "kind": "constant",
       "value": "(-107573/45)*e^(-8)+1",
       "sourceIds": [],
@@ -43,28 +177,14 @@
         "kind": "dirac",
         "at": "(-107573/45)*e^(-8)+1"
       }
-    },
-    {
-      "id": "t3",
-      "kind": "constant",
-      "value": "(1/12)*e^(-4)*sqrt(3)*sqrt(6)*sqrt(pi)^(-1)",
-      "sourceIds": [],
-      "linear": {
-        "offset": "(1/12)*e^(-4)*sqrt(3)*sqrt(6)*sqrt(pi)^(-1)",
-        "coefficients": {}
-      },
-      "cdf": {
-        "kind": "dirac",
-        "at": "(1/12)*e^(-4)*sqrt(3)*sqrt(6)*sqrt(pi)^(-1)"
-      }
     }
   ],
   "outputs": {
-    "probe": {
+    "energy": {
       "root": "t0",
       "cdf": {
         "kind": "dirac",
-        "at": "16"
+        "at": "-1/32"
       },
       "definition": {
         "kind": "pushforward-measure",
@@ -75,11 +195,11 @@
         }
       }
     },
-    "polar": {
+    "sphere": {
       "root": "t1",
       "cdf": {
         "kind": "dirac",
-        "at": "1/2"
+        "at": "(-107573/45)*e^(-8)+1"
       },
       "definition": {
         "kind": "pushforward-measure",
@@ -90,60 +210,15 @@
         }
       }
     },
-    "sphere": {
-      "root": "t2",
+    "insideTap": {
+      "root": "t1",
       "cdf": {
         "kind": "dirac",
         "at": "(-107573/45)*e^(-8)+1"
       },
       "definition": {
         "kind": "pushforward-measure",
-        "map": "t2",
-        "joint": {
-          "kind": "independent-product",
-          "sourceIds": []
-        }
-      }
-    },
-    "psi": {
-      "root": "t3",
-      "cdf": {
-        "kind": "dirac",
-        "at": "(1/12)*e^(-4)*sqrt(3)*sqrt(6)*sqrt(pi)^(-1)"
-      },
-      "definition": {
-        "kind": "pushforward-measure",
-        "map": "t3",
-        "joint": {
-          "kind": "independent-product",
-          "sourceIds": []
-        }
-      }
-    },
-    "field": {
-      "root": "t3",
-      "cdf": {
-        "kind": "dirac",
-        "at": "(1/12)*e^(-4)*sqrt(3)*sqrt(6)*sqrt(pi)^(-1)"
-      },
-      "definition": {
-        "kind": "pushforward-measure",
-        "map": "t3",
-        "joint": {
-          "kind": "independent-product",
-          "sourceIds": []
-        }
-      }
-    },
-    "enclosed": {
-      "root": "t2",
-      "cdf": {
-        "kind": "dirac",
-        "at": "(-107573/45)*e^(-8)+1"
-      },
-      "definition": {
-        "kind": "pushforward-measure",
-        "map": "t2",
+        "map": "t1",
         "joint": {
           "kind": "independent-product",
           "sourceIds": []
