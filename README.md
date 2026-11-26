@@ -6,7 +6,7 @@ Open **Version history** in Chaos Lab to explore the 20 hydrogen designs in this
 
 The connected Hamiltonian and eigenstate solvers give $E=-1/32$ Hartree for this state.
 
-The purple **Electron position X** block declares the three-dimensional quantity in Bohr radii. Open its inspector to see **Born density** as its law provider. The sphere measurement and spatial tap both observe X. Projected detections draw from the final law; the central slice evaluates the density directly.
+The purple **Electron position X** block declares the three-dimensional quantity in Bohr radii. Open its inspector to see **Born density** as its law provider. The sphere measurement and spatial tap both observe X. Projected detections draw from the final law. The central slice evaluates the density directly.
 
 ![Chaos Lab dashboard with the 4p model, m = 1, open in version history](dashboard.png)
 
