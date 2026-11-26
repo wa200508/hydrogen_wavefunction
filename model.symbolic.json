@@ -129,8 +129,7 @@
       "kind": "born",
       "observable": "position",
       "inputs": {
-        "state": "normalized",
-        "observable": "position"
+        "law": "density"
       }
     },
     "sphere": {
@@ -152,8 +151,7 @@
       "kind": "born",
       "observable": "position",
       "inputs": {
-        "state": "normalized",
-        "observable": "position"
+        "law": "density"
       }
     },
     "insideTap": {
